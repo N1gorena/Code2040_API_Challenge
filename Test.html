@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<title>Code 2040 API Challenge</title>
+	<meta charset="utf-8" />
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+	<script>
+	$(document).ready(function(){
+  $("button").click(function(){
+    $.post("http://challenge.code2040.org/api/register",
+    {
+      email:"guangore@usc.edu",
+      github:"https://github.com/N1gorena/Code2040_API_Challenge"
+    },
+    function(data,status){
+      alert("Data: " + data + "\nStatus: " + status);
+    });
+  });
+});
+	
+	</script>
+</head>
+<body>
+	<form method="POST" action="http://challenge.code2040.org/api/register">
+	<input type="text" name="dictionary" value="[{email:guangore@usc.edu,github:https://github.com/N1gorena/Code2040_API_Challenge}]"/>
+	<input type="submit" value="Submit">
+	</form>
+	<button>Send an HTTP POST request to a page and get the result back</button>
+</body>
+</html>
+
