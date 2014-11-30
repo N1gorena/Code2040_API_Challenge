@@ -4,20 +4,43 @@
 	<title>Code 2040 API Challenge</title>
 	<meta charset="utf-8" />
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+
+</head>
+<body>
+	<div id="id01"> </div>
+	<!--form method="POST" action="http://challenge.code2040.org/api/register">
+	<input type="text" name="dictionary" value="[{email:guangore@usc.edu,github:https://github.com/N1gorena/Code2040_API_Challenge}]"/>
+	<input type="submit" value="Submit">
+	</form>
+	<button>Send an HTTP POST request to a page and get the result back</button-->
 	<script>
 	var xhr = new XMLHttpRequest();
 	xhr.onreadystatechange=function() {
             if (xhr.readyState==4 && xhr.status==200) {
-				alert(xhr.responsetext);
+				var myArr = JSON.parse(xhr.responseText);
+				alert(myArr.result);
             }
         }
+	
 	xhr.open("POST", "http://challenge.code2040.org/api/register", false);
 	xhr.setRequestHeader("Content-type","application/x-www-form-urlencoded");
 	xhr.setRequestHeader("Content-type", "application/json");
+	xhr.setRequestHeader("Content-type","charset=utf-8");
 	var parameters = JSON.stringify({"email":"guangore@usc.edu","github":"https://github.com/N1gorena/Code2040_API_Challenge"});
 	xhr.send(parameters);
 	console.log(xhr.status);
 	console.log(xhr.statusText);
+	
+	function myFunction(arr) {
+		var out = "";
+		var i;
+		for(i = 0; i < arr.length; i++) {
+			out += '<a>' + 
+			arr[i].display + '</a><br>';
+		}
+		document.getElementById("id01").innerHTML = out;
+	}
+	
 	
 	var xhr2 = new XMLHttpRequest();
 	xhr2.open("POST", "http://challenge.code2040.org/api/getstring", false);
@@ -39,13 +62,6 @@
 	console.log(xhr3.responsetext);
 	console.log(xhr3.statusText);
 	</script>
-</head>
-<body>
-	<!--form method="POST" action="http://challenge.code2040.org/api/register">
-	<input type="text" name="dictionary" value="[{email:guangore@usc.edu,github:https://github.com/N1gorena/Code2040_API_Challenge}]"/>
-	<input type="submit" value="Submit">
-	</form>
-	<button>Send an HTTP POST request to a page and get the result back</button-->
 </body>
 </html>
 
