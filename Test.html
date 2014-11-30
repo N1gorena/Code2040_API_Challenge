@@ -5,27 +5,47 @@
 	<meta charset="utf-8" />
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 	<script>
-	$(document).ready(function(){
-  $("button").click(function(){
-    $.post("http://challenge.code2040.org/api/register",
-    {
-      email:"guangore@usc.edu",
-      github:"https://github.com/N1gorena/Code2040_API_Challenge"
-    },
-    function(data,status){
-      alert("Data: " + data + "\nStatus: " + status);
-    });
-  });
-});
+	var xhr = new XMLHttpRequest();
+	xhr.onreadystatechange=function() {
+            if (xhr.readyState==4 && xhr.status==200) {
+				alert(xhr.responsetext);
+            }
+        }
+	xhr.open("POST", "http://challenge.code2040.org/api/register", false);
+	xhr.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+	xhr.setRequestHeader("Content-type", "application/json");
+	var parameters = JSON.stringify({"email":"guangore@usc.edu","github":"https://github.com/N1gorena/Code2040_API_Challenge"});
+	xhr.send(parameters);
+	console.log(xhr.status);
+	console.log(xhr.statusText);
 	
+	var xhr2 = new XMLHttpRequest();
+	xhr2.open("POST", "http://challenge.code2040.org/api/getstring", false);
+	//xhr.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+	xhr2.setRequestHeader("Content-type", "application/json");
+	var parameters = JSON.stringify({"token":"BxoAKOHX00"});
+	xhr2.send(parameters);
+	console.log(xhr2.status);
+	console.log(xhr2.responsetext);
+	console.log(xhr2.statusText);
+	
+	var xhr3 = new XMLHttpRequest();
+	xhr3.open("POST", "http://challenge.code2040.org/api/getstring", false);
+	//xhr.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+	xhr3.setRequestHeader("Content-type", "application/json");
+	var parameters = JSON.stringify({"token":"BxoAKOHX00","string":"keSvH"});
+	xhr3.send(parameters);
+	console.log(xhr3.status);
+	console.log(xhr3.responsetext);
+	console.log(xhr3.statusText);
 	</script>
 </head>
 <body>
-	<form method="POST" action="http://challenge.code2040.org/api/register">
+	<!--form method="POST" action="http://challenge.code2040.org/api/register">
 	<input type="text" name="dictionary" value="[{email:guangore@usc.edu,github:https://github.com/N1gorena/Code2040_API_Challenge}]"/>
 	<input type="submit" value="Submit">
 	</form>
-	<button>Send an HTTP POST request to a page and get the result back</button>
+	<button>Send an HTTP POST request to a page and get the result back</button-->
 </body>
 </html>
 
