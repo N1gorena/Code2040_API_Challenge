@@ -25,6 +25,13 @@
 		
 		return prefArray;
 	}
+	function dateMaker(datestamp,interval){
+		var date = new Date(datestamp);
+		var secondsOfDate = date.getTime();
+		date.setTime(((interval*1000) + secondsOfDate)); 
+		alert( date.toDateString() );
+		return date.toISOString();
+	}
 	
 	var toke = null;
 	var xhr = new XMLHttpRequest();
@@ -125,6 +132,8 @@
 	console.log(xhr5.status);
 	console.log(xhr5.statusText);
 	*/
+	/*
+		**PREFIX ARRAY WORKS
 	var prefix = null;
 	var myArr = null;
 	var xhr6 = new XMLHttpRequest();
@@ -163,6 +172,46 @@
 	xhr7.send(parameters);
 	console.log(xhr7.status);
 	console.log(xhr7.statusText);
+	*/
+	
+	var datestamp = null;
+	var interval = null;
+	var xhr8 = new XMLHttpRequest();
+	xhr8.onreadystatechange=function() {
+            if (xhr8.readyState==4 && xhr8.status==200) {
+				var ret = JSON.parse(xhr8.responseText);
+				datestamp = ret.result.datestamp;
+				interval = ret.result.interval;
+            }
+        }
+	
+	xhr8.open("POST", "http://challenge.code2040.org/api/time", false);
+	//xhr4.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+	xhr8.setRequestHeader("Content-type", "application/json");
+	var parameters = JSON.stringify({"token":toke});
+	xhr8.send(parameters);
+	console.log(xhr8.status);
+	console.log(xhr8.statusText);
+	
+	
+	var intervalTime = dateMaker(datestamp,interval); 
+
+	var xhr9 = new XMLHttpRequest();
+	xhr9.onreadystatechange=function() {
+            if (xhr9.readyState==4 && xhr9.status==200) {
+				var ret = JSON.parse(xhr9.responseText);
+				alert(ret.result);
+            }
+        }
+	
+	xhr9.open("POST", "http://challenge.code2040.org/api/validatetime", false);
+	//xhr4.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+	xhr9.setRequestHeader("Content-type", "application/json");
+	var parameters = JSON.stringify({"token":toke,"datestamp":intervalTime});
+	xhr9.send(parameters);
+	console.log(xhr9.status);
+	console.log(xhr9.statusText);
+	
 	</script>
 </head>
 <body>
