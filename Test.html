@@ -4,21 +4,20 @@
 	<title>Code 2040 API Challenge</title>
 	<meta charset="utf-8" />
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-
-</head>
-<body>
-	<div id="id01"> </div>
-	<!--form method="POST" action="http://challenge.code2040.org/api/register">
-	<input type="text" name="dictionary" value="[{email:guangore@usc.edu,github:https://github.com/N1gorena/Code2040_API_Challenge}]"/>
-	<input type="submit" value="Submit">
-	</form>
-	<button>Send an HTTP POST request to a page and get the result back</button-->
 	<script>
+	function SimpleStringFlip(str){
+		var reverse = str.split('');
+		reverse = reverse.reverse();
+		reverse = reverse.join('');
+		return reverse;
+	}
+	
+	var toke = null;
 	var xhr = new XMLHttpRequest();
 	xhr.onreadystatechange=function() {
             if (xhr.readyState==4 && xhr.status==200) {
-				var myArr = JSON.parse(xhr.responseText);
-				alert(myArr.result);
+				var ret = JSON.parse(xhr.responseText);
+				toke = ret.result;
             }
         }
 	
@@ -31,27 +30,27 @@
 	console.log(xhr.status);
 	console.log(xhr.statusText);
 	
-	function myFunction(arr) {
-		var out = "";
-		var i;
-		for(i = 0; i < arr.length; i++) {
-			out += '<a>' + 
-			arr[i].display + '</a><br>';
-		}
-		document.getElementById("id01").innerHTML = out;
-	}
-	
-	
+	var stringToFlip = null
 	var xhr2 = new XMLHttpRequest();
+	xhr2.onreadystatechange=function() {
+            if (xhr2.readyState==4 && xhr2.status==200) {
+				var ret = JSON.parse(xhr2.responseText);
+				stringToFlip = ret.result;
+            }
+        }
+	
 	xhr2.open("POST", "http://challenge.code2040.org/api/getstring", false);
 	//xhr.setRequestHeader("Content-type","application/x-www-form-urlencoded");
 	xhr2.setRequestHeader("Content-type", "application/json");
-	var parameters = JSON.stringify({"token":"BxoAKOHX00"});
+	var parameters = JSON.stringify({"token":toke});
 	xhr2.send(parameters);
 	console.log(xhr2.status);
-	console.log(xhr2.responsetext);
 	console.log(xhr2.statusText);
+	alert(SimpleStringFlip(stringToFlip));
 	
+	
+	
+	/*
 	var xhr3 = new XMLHttpRequest();
 	xhr3.open("POST", "http://challenge.code2040.org/api/getstring", false);
 	//xhr.setRequestHeader("Content-type","application/x-www-form-urlencoded");
@@ -61,7 +60,15 @@
 	console.log(xhr3.status);
 	console.log(xhr3.responsetext);
 	console.log(xhr3.statusText);
+	*/
 	</script>
+</head>
+<body>
+	<!--form method="POST" action="http://challenge.code2040.org/api/register">
+	<input type="text" name="dictionary" value="[{email:guangore@usc.edu,github:https://github.com/N1gorena/Code2040_API_Challenge}]"/>
+	<input type="submit" value="Submit">
+	</form>
+	<button>Send an HTTP POST request to a page and get the result back</button-->
 </body>
 </html>
 
