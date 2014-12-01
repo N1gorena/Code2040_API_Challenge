@@ -15,6 +15,16 @@
 		needlePos = haystack.indexOf(needle);
 		return needlePos;
 	}
+	function PrefixParser(array,prefix){
+		var len = array.length;
+		var prefArray = [];
+		for(var i = 0 ; i < len ; i++){
+			if(array[i].search(prefix) !== 0)
+				prefArray.push(array[i]);
+		}
+		
+		return prefArray;
+	}
 	
 	var toke = null;
 	var xhr = new XMLHttpRequest();
@@ -74,6 +84,9 @@
 	alert(varified);
 	console.log(xhr3.statusText);
 	*/
+	
+	
+	/* **Needle Haystack Search done
 	var need = null;
 	var hay = null;
 	
@@ -111,7 +124,45 @@
 	xhr5.send(parameters);
 	console.log(xhr5.status);
 	console.log(xhr5.statusText);
+	*/
+	var prefix = null;
+	var myArr = null;
+	var xhr6 = new XMLHttpRequest();
+	xhr6.onreadystatechange=function() {
+            if (xhr6.readyState==4 && xhr6.status==200) {
+				var ret = JSON.parse(xhr6.responseText);
+				prefix = ret.result.prefix;
+				myArr = ret.result.array;
+            }
+        }
 	
+	xhr6.open("POST", "http://challenge.code2040.org/api/prefix", false);
+	//xhr4.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+	xhr6.setRequestHeader("Content-type", "application/json");
+	var parameters = JSON.stringify({"token":toke});
+	xhr6.send(parameters);
+	console.log(xhr6.status);
+	console.log(xhr6.statusText);
+	
+	
+	var prefixBasedArray = PrefixParser(myArr,prefix);
+	alert(JSON.stringify(prefixBasedArray));
+	
+	var xhr7 = new XMLHttpRequest();
+	xhr7.onreadystatechange=function() {
+            if (xhr7.readyState==4 && xhr7.status==200) {
+				var ret = JSON.parse(xhr7.responseText);
+				alert(ret.result);
+            }
+        }
+	
+	xhr7.open("POST", "http://challenge.code2040.org/api/validateprefix", false);
+	//xhr4.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+	xhr7.setRequestHeader("Content-type", "application/json");
+	var parameters = JSON.stringify({"token":toke,"array":prefixBasedArray});
+	xhr7.send(parameters);
+	console.log(xhr7.status);
+	console.log(xhr7.statusText);
 	</script>
 </head>
 <body>
