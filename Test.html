@@ -51,9 +51,10 @@
 	console.log(xhr.status);
 	console.log(xhr.statusText);
 	
-	/*
-	**Working for String Flipping
+	
+	
 	var stringToFlip = null
+	//Retrieving string to be flipped
 	var xhr2 = new XMLHttpRequest();
 	xhr2.onreadystatechange=function() {
             if (xhr2.readyState==4 && xhr2.status==200) {
@@ -63,17 +64,17 @@
         }
 	
 	xhr2.open("POST", "http://challenge.code2040.org/api/getstring", false);
-	//xhr.setRequestHeader("Content-type","application/x-www-form-urlencoded");
 	xhr2.setRequestHeader("Content-type", "application/json");
 	var parameters = JSON.stringify({"token":toke});
 	xhr2.send(parameters);
 	console.log(xhr2.status);
 	console.log(xhr2.statusText);
+	//End String Retrieval
 	
 	var flippedString = SimpleStringFlip(stringToFlip)
-	
 	var varified = null;
 	
+	//String flip verification
 	var xhr3 = new XMLHttpRequest();
 	xhr3.onreadystatechange=function() {
             if (xhr3.readyState==4 && xhr3.status==200) {
@@ -81,22 +82,19 @@
 				 varified = ret.result;
             }
         }
-	
 	xhr3.open("POST", "http://challenge.code2040.org/api/validatestring", false);
-	//xhr.setRequestHeader("Content-type","application/x-www-form-urlencoded");
 	xhr3.setRequestHeader("Content-type", "application/json");
 	var parameters = JSON.stringify({"token":toke,"string":flippedString});
 	xhr3.send(parameters);
 	console.log(xhr3.status);
 	alert(varified);
 	console.log(xhr3.statusText);
-	*/
+	//End flip verification
 	
 	
-	/* **Needle Haystack Search done
 	var need = null;
 	var hay = null;
-	
+	//Needle and Haystack retrieval
 	var xhr4 = new XMLHttpRequest();
 	xhr4.onreadystatechange=function() {
             if (xhr4.readyState==4 && xhr4.status==200) {
@@ -113,9 +111,11 @@
 	xhr4.send(parameters);
 	console.log(xhr4.status);
 	console.log(xhr4.statusText);
-	
+	//end Retrieval
 	
 	var needlePosition = NeedleHaystack(need,hay);
+	
+	//Needle and Haystack verification
 	var xhr5 = new XMLHttpRequest();
 	xhr5.onreadystatechange=function() {
             if (xhr5.readyState==4 && xhr5.status==200) {
@@ -125,17 +125,18 @@
         }
 	
 	xhr5.open("POST", "http://challenge.code2040.org/api/validateneedle", false);
-	//xhr4.setRequestHeader("Content-type","application/x-www-form-urlencoded");
 	xhr5.setRequestHeader("Content-type", "application/json");
 	var parameters = JSON.stringify({"token":toke,"needle":needlePosition});
 	xhr5.send(parameters);
 	console.log(xhr5.status);
 	console.log(xhr5.statusText);
-	*/
-	/*
-		**PREFIX ARRAY WORKS
+	//End verification
+	
+	
 	var prefix = null;
 	var myArr = null;
+	
+	//Prefix retrieval
 	var xhr6 = new XMLHttpRequest();
 	xhr6.onreadystatechange=function() {
             if (xhr6.readyState==4 && xhr6.status==200) {
@@ -146,17 +147,18 @@
         }
 	
 	xhr6.open("POST", "http://challenge.code2040.org/api/prefix", false);
-	//xhr4.setRequestHeader("Content-type","application/x-www-form-urlencoded");
 	xhr6.setRequestHeader("Content-type", "application/json");
 	var parameters = JSON.stringify({"token":toke});
 	xhr6.send(parameters);
 	console.log(xhr6.status);
 	console.log(xhr6.statusText);
+	//Retrieval end
 	
 	
 	var prefixBasedArray = PrefixParser(myArr,prefix);
 	alert(JSON.stringify(prefixBasedArray));
 	
+	//Prefix verification
 	var xhr7 = new XMLHttpRequest();
 	xhr7.onreadystatechange=function() {
             if (xhr7.readyState==4 && xhr7.status==200) {
@@ -166,16 +168,17 @@
         }
 	
 	xhr7.open("POST", "http://challenge.code2040.org/api/validateprefix", false);
-	//xhr4.setRequestHeader("Content-type","application/x-www-form-urlencoded");
 	xhr7.setRequestHeader("Content-type", "application/json");
 	var parameters = JSON.stringify({"token":toke,"array":prefixBasedArray});
 	xhr7.send(parameters);
 	console.log(xhr7.status);
 	console.log(xhr7.statusText);
-	*/
+	//Verification end
 	
 	var datestamp = null;
 	var interval = null;
+	
+	//Date retrieval
 	var xhr8 = new XMLHttpRequest();
 	xhr8.onreadystatechange=function() {
             if (xhr8.readyState==4 && xhr8.status==200) {
@@ -184,18 +187,18 @@
 				interval = ret.result.interval;
             }
         }
-	
 	xhr8.open("POST", "http://challenge.code2040.org/api/time", false);
-	//xhr4.setRequestHeader("Content-type","application/x-www-form-urlencoded");
 	xhr8.setRequestHeader("Content-type", "application/json");
 	var parameters = JSON.stringify({"token":toke});
 	xhr8.send(parameters);
 	console.log(xhr8.status);
 	console.log(xhr8.statusText);
+	//Retrieval end
 	
 	
 	var intervalTime = dateMaker(datestamp,interval); 
 
+	//Date verification
 	var xhr9 = new XMLHttpRequest();
 	xhr9.onreadystatechange=function() {
             if (xhr9.readyState==4 && xhr9.status==200) {
@@ -205,21 +208,15 @@
         }
 	
 	xhr9.open("POST", "http://challenge.code2040.org/api/validatetime", false);
-	//xhr4.setRequestHeader("Content-type","application/x-www-form-urlencoded");
 	xhr9.setRequestHeader("Content-type", "application/json");
 	var parameters = JSON.stringify({"token":toke,"datestamp":intervalTime});
 	xhr9.send(parameters);
 	console.log(xhr9.status);
 	console.log(xhr9.statusText);
-	
+	//Verification End
 	</script>
 </head>
 <body>
-	<!--form method="POST" action="http://challenge.code2040.org/api/register">
-	<input type="text" name="dictionary" value="[{email:guangore@usc.edu,github:https://github.com/N1gorena/Code2040_API_Challenge}]"/>
-	<input type="submit" value="Submit">
-	</form>
-	<button>Send an HTTP POST request to a page and get the result back</button-->
 </body>
 </html>
 
