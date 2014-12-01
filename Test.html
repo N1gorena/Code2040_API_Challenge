@@ -11,6 +11,10 @@
 		reverse = reverse.join('');
 		return reverse;
 	}
+	function NeedleHaystack(needle,haystack){
+		needlePos = haystack.indexOf(needle);
+		return needlePos;
+	}
 	
 	var toke = null;
 	var xhr = new XMLHttpRequest();
@@ -30,6 +34,8 @@
 	console.log(xhr.status);
 	console.log(xhr.statusText);
 	
+	/*
+	**Working for String Flipping
 	var stringToFlip = null
 	var xhr2 = new XMLHttpRequest();
 	xhr2.onreadystatechange=function() {
@@ -67,6 +73,44 @@
 	console.log(xhr3.status);
 	alert(varified);
 	console.log(xhr3.statusText);
+	*/
+	var need = null;
+	var hay = null;
+	
+	var xhr4 = new XMLHttpRequest();
+	xhr4.onreadystatechange=function() {
+            if (xhr4.readyState==4 && xhr4.status==200) {
+				var ret = JSON.parse(xhr4.responseText);
+				 need = ret.result.needle;
+				 hay = ret.result.haystack;
+            }
+        }
+	
+	xhr4.open("POST", "http://challenge.code2040.org/api/haystack", false);
+	//xhr4.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+	xhr4.setRequestHeader("Content-type", "application/json");
+	var parameters = JSON.stringify({"token":toke});
+	xhr4.send(parameters);
+	console.log(xhr4.status);
+	console.log(xhr4.statusText);
+	
+	
+	var needlePosition = NeedleHaystack(need,hay);
+	var xhr5 = new XMLHttpRequest();
+	xhr5.onreadystatechange=function() {
+            if (xhr5.readyState==4 && xhr5.status==200) {
+				var ret = JSON.parse(xhr5.responseText);
+				alert(ret.result);
+            }
+        }
+	
+	xhr5.open("POST", "http://challenge.code2040.org/api/validateneedle", false);
+	//xhr4.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+	xhr5.setRequestHeader("Content-type", "application/json");
+	var parameters = JSON.stringify({"token":toke,"needle":needlePosition});
+	xhr5.send(parameters);
+	console.log(xhr5.status);
+	console.log(xhr5.statusText);
 	
 	</script>
 </head>
